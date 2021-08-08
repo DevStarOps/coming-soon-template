@@ -24,9 +24,11 @@ jobs:
       shell: bash
       run: |
         branchName="${GITHUB_REF#refs/heads/}"
+        imageRepository="$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')"
         echo "$branchName"
-        echo BRANCH_NAME=$branchName" >> $GITHUB_ENV
-        echo IMAGE_REPOSITORY=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]') >> $GITHUB_ENV
+        echo "$imageRepository"
+        echo BRANCH_NAME=$branchName >> $GITHUB_ENV
+        echo IMAGE_REPOSITORY=$imageRepository >> $GITHUB_ENV
        
     - name: 'Login via Azure CLI'
       uses: azure/login@v1
