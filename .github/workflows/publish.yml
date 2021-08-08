@@ -44,14 +44,6 @@ jobs:
         docker build --tag ghcr.io/${{ github.actor }}/${{env.appname}}:${{ github.sha }} --tag ghcr.io/${{ github.actor }}/${{env.appname}}:${{ steps.version.outputs.BRANCH_NAME }} -f build/Dockerfile .
         docker push --all-tags ghcr.io/${{ github.actor }}/${{env.appname}}
         
-    - name: 'Deploy to Azure Web App (main)'
-      uses: azure/webapps-deploy@v2
-      if: ${{ steps.version.outputs.BRANCH_NAME == 'main' }}
-      with:
-        app-name: '${{env.appname}}'
-        slot-name: 'production'
-        images: 'ghcr.io/${{ github.actor }}/${{env.appname}}:${{ github.sha }}'
-
     - name: 'Azure logout'
       run: |
         az logout
