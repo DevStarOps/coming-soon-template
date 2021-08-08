@@ -34,8 +34,8 @@ jobs:
     
     - name: 'Build and push image'
       run: |
-        docker build --tag ghcr.io/${{ github.actor }}/${{env.appname}}:${{ github.sha }} --tag ghcr.io/${{ github.actor }}/${{env.appname}}:${{ steps.version.outputs.BRANCH_NAME }} -f build/Dockerfile .
-        docker push --all-tags ghcr.io/${{ github.actor }}/${{env.appname}}
+        docker build --tag ghcr.io/${{ github.repository_owner }}/${{env.appname}}:${{ github.sha }} --tag ghcr.io/${{ github.repository_owner }}/${{env.appname}}:${{ steps.version.outputs.BRANCH_NAME }} -f build/Dockerfile .
+        docker push --all-tags ghcr.io/${{ github.repository_owner }}/${{env.appname}}
       env:
         appname: '${{env.appname}}'
         
@@ -45,7 +45,7 @@ jobs:
       with:
         app-name: '${{env.appname}}'
         slot-name: 'production'
-        images: 'ghcr.io/${{ github.actor }}/${{env.appname}}:${{ github.sha }}'
+        images: 'ghcr.io/${{ github.repository_owner }}/${{env.appname}}:${{ github.sha }}'
       env:
         appname: '${{env.appname}}'
 
