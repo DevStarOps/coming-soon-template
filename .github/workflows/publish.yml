@@ -32,10 +32,8 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     
-    - name: 'Build and push image'
     - run: |
-        docker build --tag ghcr.io/${{ github.actor }}/${{env.appname}}:${{ github.sha }} --tag ghcr.io/${{ github.actor }}/${{env.appname}}:${{ steps.version.outputs.BRANCH_NAME }} -f build/Dockerfile .
-        docker push --all-tags ghcr.io/${{ github.actor }}/${{env.appname}}
+        az webapp list --query "[?state=='Running']"
         
     - name: 'Azure logout'
       run: |
