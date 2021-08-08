@@ -37,13 +37,13 @@ jobs:
     
     - name: 'Build and push image'
       run: |
-        docker build --tag ${{ env.IMAGE_REPOSITORY}}:${{ github.sha }} --tag ${{ env.IMAGE_REPOSITORY}}:${{ steps.version.outputs.BRANCH_NAME }} -f build/Dockerfile .
+        docker build --tag ${{ env.IMAGE_REPOSITORY}}:${{ github.sha }} --tag ${{ env.IMAGE_REPOSITORY}}:${{ env.BRANCH_NAME }} -f build/Dockerfile .
         docker push --all-tags ${{ env.IMAGE_REPOSITORY}}
       env:
         appname: '${{env.appname}}'
         
     - name: 'Deploy to Azure Web App (main)'
-      if: ${{ steps.version.outputs.BRANCH_NAME == 'main' }}
+      if: ${{ env.BRANCH_NAME == 'main' }}
       uses: azure/webapps-deploy@v2
       with:
         app-name: '${{env.appname}}'
