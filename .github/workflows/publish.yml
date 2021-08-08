@@ -45,8 +45,8 @@ jobs:
         docker push --all-tags ghcr.io/${{ github.actor }}/${{env.appname}}
         
     - name: 'Deploy to Azure Web App (main)'
-      if: ${{ steps.version.outputs.BRANCH_NAME == 'main' }}
       uses: azure/webapps-deploy@v2
+      if: ${{ steps.version.outputs.BRANCH_NAME == 'main' }}
       with:
         app-name: '${{env.appname}}'
         slot-name: 'production'
