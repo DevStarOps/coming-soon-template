@@ -24,7 +24,7 @@ jobs:
       shell: bash
       run: |
         branchName="${GITHUB_REF#refs/heads/}"
-        imageRepository="$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')"
+        imageRepository="ghcr.io/$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')"
         echo "$branchName"
         echo "$imageRepository"
         echo BRANCH_NAME=$branchName >> $GITHUB_ENV
@@ -37,8 +37,8 @@ jobs:
     
     - name: 'Build and push image'
       run: |
-        docker build --tag ghcr.io/${{ env.IMAGE_REPOSITORY}}:${{ github.sha }} --tag ghcr.io/${{ env.IMAGE_REPOSITORY}}:${{ steps.version.outputs.BRANCH_NAME }} -f build/Dockerfile .
-        docker push --all-tags ghcr.io/${{ env.IMAGE_REPOSITORY}}
+        docker build --tag ${{ env.IMAGE_REPOSITORY}}:${{ github.sha }} --tag ${{ env.IMAGE_REPOSITORY}}:${{ steps.version.outputs.BRANCH_NAME }} -f build/Dockerfile .
+        docker push --all-tags ${{ env.IMAGE_REPOSITORY}}
       env:
         appname: '${{env.appname}}'
         
@@ -48,7 +48,7 @@ jobs:
       with:
         app-name: '${{env.appname}}'
         slot-name: 'production'
-        images: 'ghcr.io/${{ env.IMAGE_REPOSITORY}}:${{ github.sha }}'
+        images: '${{ env.IMAGE_REPOSITORY}}:${{ github.sha }}'
       env:
         appname: '${{env.appname}}'
 
