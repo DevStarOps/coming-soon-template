@@ -6,10 +6,11 @@ on:
     - staging
     - main
 
+env:
+  appname: coming-soon-demo
+
 jobs:
   build_and_publish:
-    env:
-      appname: coming-soon-demo
     runs-on: ubuntu-latest
     permissions:
       packages: write
