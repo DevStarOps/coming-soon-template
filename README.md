@@ -12,6 +12,7 @@ Getting started is simple... use this repo as a base, it contains a workflow to 
 - Create Service Principal for your apps resource group
 - Add repository secret for AZURE_CREDENTIALS from the create service principal output
 - Optionally replace background.jpg which comes from [Gordon Beeming](https://unsplash.com/@gordon_beeming) ([this 1](https://unsplash.com/photos/q_XRMFLzWwY)) on [Unsplash](https://unsplash.com/)
+- Update publish.yml with your apps name that the coming soon page should deploy to in Azure
 
 ## Create Service Principal
 
